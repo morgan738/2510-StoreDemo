@@ -1,4 +1,6 @@
-const pg = require('pg');
-const client = new pg.Client(process.env.DATABASE_URL || 'postgres://localhost/your_db_name_here');
+const pg = require("pg");
+const client = new pg.Client(
+  process.env.DATABASE_URL || "postgres://localhost/the_store"
+);
 
-module.exports = client
+module.exports = client;
