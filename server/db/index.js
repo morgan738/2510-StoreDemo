@@ -1,7 +1,7 @@
 const client = require("./client");
 const { createProduct } = require("./products");
 const { createUser } = require("./users");
-const { fetchOrders } = require("./orders");
+const { fetchOrders, updateOrder } = require("./orders");
 const { createLineItem, updateLineItem } = require("./lineItems");
 
 const seed = async () => {
@@ -68,6 +68,10 @@ const seed = async () => {
     order_id: cart.id,
     product_id: steamDeck.id,
   });
+  cart.is_cart = false;
+  await updateOrder(cart);
+
+  console.log("created tables and seeded data");
 };
 
 module.exports = {

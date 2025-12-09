@@ -23,6 +23,18 @@ const fetchOrders = async (userId) => {
   return response.rows;
 };
 
+const updateOrder = async (order) => {
+  const SQL = `
+    UPDATE orders
+    SET is_cart = $1
+    WHERE id = $2
+    RETURNING *
+  `;
+  const response = await client.query(SQL, [order.is_cart, order.id]);
+  return response.rows[0];
+};
+
 module.exports = {
   fetchOrders,
+  updateOrder,
 };
