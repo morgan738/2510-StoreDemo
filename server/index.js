@@ -7,11 +7,11 @@ app.use(express.json());
 //for deployment only
 const path = require("path");
 app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"))
+  res.sendFile(path.join(__dirname, "../client/dist/index.html")),
 );
 app.use(
   "/assets",
-  express.static(path.join(__dirname, "../client/dist/assets"))
+  express.static(path.join(__dirname, "../client/dist/assets")),
 );
 
 //use api routes
@@ -29,8 +29,9 @@ const init = async () => {
   const PORT = process.env.PORT || 3000;
   await client.connect();
   console.log("connected to database");
-
-  await seed();
+  if (process.env.SYNC) {
+    await seed();
+  }
 
   app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
